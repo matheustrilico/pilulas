@@ -1,0 +1,54 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font-family:'DejaVu Sans','Segoe UI',sans-serif;color:#2C2C2C;display:flex;flex-direction:column;min-height:100vh;max-width:794px;margin:0 auto}
+.wave{width:100%;display:block}
+.header{display:flex;justify-content:space-between;align-items:center;padding:10px 24px 4px}
+.header img{width:165px;height:auto}
+.contact{font-size:9px;line-height:1.9;text-align:right;color:#2C2C2C}
+.label{text-align:center;font-weight:bold;font-size:12px;color:#1A1A1A;margin-top:10px}
+.rule{border:none;border-top:.5px solid #D5D5D5;margin:10px 24px 0}
+.content{flex:1;padding:0 24px}
+h1{font-size:18px;color:#1A1A1A;margin:14px 0 4px;line-height:1.25}
+.sub{font-style:italic;font-size:11px;color:#666;margin:0 0 16px}
+.sec{font-weight:bold;font-size:13px;color:#1A1A1A;margin:16px 0 8px}
+.sec::before{content:"\25B8";color:#3B9AD9;margin-right:8px}
+.para{font-size:11px;line-height:1.55;text-align:justify;margin:0 0 8px}
+.bul,.chk{font-size:11px;line-height:1.55;text-align:justify;margin:0 0 7px;padding-left:18px;text-indent:-18px}
+.bul::before{content:"\2022";color:#3B9AD9;margin-right:9px;font-weight:bold}
+.chk::before{content:"\2713";color:#3B9AD9;margin-right:9px;font-weight:bold}
+.refhead{font-weight:bold;font-size:10.5px;color:#1A1A1A;margin:18px 0 6px}
+.ref{font-size:9px;line-height:1.45;text-align:justify;color:#2C2C2C;margin:0 0 6px}
+@media print{body{max-width:none}}
+</style></head>
+<body>
+<svg class="wave" viewBox="0 0 800 64" preserveAspectRatio="none" height="58"><path d="M0,30 Q200,56 400,30 T800,30 L800,0 L0,0 Z" fill="#3B9AD9"/><path d="M0,40 Q200,14 400,40 T800,40 L800,0 L0,0 Z" fill="#A8D5F0" opacity=".65"/></svg>
+<div class="header">
+<img src="dr-matheus-logo-final.png" alt="logo">
+<div class="contact">📧&nbsp;atendimento@matheustriliconeurologia.com.br<br>📷&nbsp;@drtrilico.neuro<br>📘&nbsp;/matheustriliconeurologia</div>
+</div>
+<div class="label">💊 "Pílulas de Conhecimento"</div>
+<hr class="rule">
+<div class="content"><h1 id="t"></h1><p class="sub" id="s"></p><div id="body"></div>
+<div class="refhead">Referências</div><div id="refs"></div></div>
+<svg class="wave" viewBox="0 0 800 44" preserveAspectRatio="none" height="40" style="margin-top:20px"><path d="M0,22 Q200,-4 400,22 T800,22 L800,22 L800,44 L0,44 Z" fill="#3B9AD9"/></svg>
+<script>
+(function(){
+ var raw=(location.hash||location.search).replace(/^[#?]/,'');
+ var body=document.getElementById('body');
+ if(!raw){document.getElementById('t').textContent='Pré-visualização';document.getElementById('s').textContent='Sem conteúdo na URL. Esta página recebe a pílula pelo link gerado pela skill.';return;}
+ var d;
+ try{d=JSON.parse(decodeURIComponent(raw));}
+ catch(e1){try{d=JSON.parse(raw);}catch(e2){document.body.innerHTML='<p style="padding:24px;font-family:sans-serif">Conteudo invalido. Recebi '+raw.length+' caracteres. Erro: '+e2+'</p>';return;}}
+ document.getElementById('t').textContent=d.t||'';
+ document.getElementById('s').textContent=d.s||'';
+ (d.secs||[]).forEach(function(sec){
+  var h=document.createElement('div');h.className='sec';h.textContent=sec.h;body.appendChild(h);
+  (sec.items||[]).forEach(function(it){var p=document.createElement('p');p.className=sec.type||'para';p.innerHTML=it;body.appendChild(p);});
+ });
+ var r=document.getElementById('refs');
+ (d.refs||[]).forEach(function(x){var p=document.createElement('p');p.className='ref';p.innerHTML=x;r.appendChild(p);});
+ document.title=d.t||'Pilula';
+})();
+</script>
+</body></html>
